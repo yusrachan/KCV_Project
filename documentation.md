@@ -1,0 +1,3 @@
+Pour mon projet, je souhaite faire un site sur une entreprise de kinésithérapie et les clients peuvent prendre un rendez-vous via un calendrier. Dans celui-ci, on peut voir quelle date le kinésithérapeute est disponible.
+Lorsque le client clique sur une date, une fenêtre s'ouvre et il doit entrer ses coordonnées.
+Quand il valide le formulaire, un mail est envoyé au kinésithérapeute pour lui avertir qu'il aura une séance à la date choisie par le client.
