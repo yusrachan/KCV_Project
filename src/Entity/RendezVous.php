@@ -21,6 +21,13 @@ class RendezVous
     #[ORM\JoinColumn(nullable: false)]
     private ?Kinesitherapeute $kinesitherapeute = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
+
+    #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Patient $patient = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,6 +53,30 @@ class RendezVous
     public function setKinesitherapeute(?Kinesitherapeute $kinesitherapeute): static
     {
         $this->kinesitherapeute = $kinesitherapeute;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPatient(): ?Patient
+    {
+        return $this->patient;
+    }
+
+    public function setPatient(?Patient $patient): static
+    {
+        $this->patient = $patient;
 
         return $this;
     }
