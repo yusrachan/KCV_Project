@@ -14,6 +14,20 @@
         {% endblock %}
     </head>
     <body>
+    <nav>
+        <ul>
+            <li><a href="#">Section 1</a></li>
+            <li><a href="#">Section 2</a></li>
+            <li><a href="#">Calendrier</a></li>
+
+            {% if app.user %}
+            <li><p>{{ app.user.nom ~ "," ~ app.user.prenom }}</p></li>
+            {% endif %}
+
+            <li><a href="{{path('app_logout')}}">Logout</a></li>            
+            
+        </ul>
+    </nav>
         {% block body %}{% endblock %}
     </body>
 </html>

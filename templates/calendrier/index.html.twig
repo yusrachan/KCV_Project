@@ -1,0 +1,40 @@
+{# templates/calendar/calendar.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier des kinés{% endblock %}
+{% block body %}
+	<h1>Calendrier des kinésithérapeutes</h1>
+
+	<h2>Liste des kinésithérapeutes :</h2>
+	<ul>
+		{% for kine in kines %}
+			<li>{{ kine }}</li>
+		{% endfor %}
+	</ul>
+
+    <h2>Dates disponibles :</h2>
+	{% for date in dates %}
+		<div class="date" data-date="{{ date }}">{{ date }}</div>
+	{% endfor %}
+    
+    <h2>Heures disponibles :</h2>
+    {% for heure in heures %}
+		<div class="heure" data-heure="{{ heure }}">{{ heure }}</div>
+	{% endfor %}
+
+    <script>
+        function openModal() {
+            $('#myModal').addClass('modal-open');
+
+        }
+
+        $('.date').on('click', function() {
+            var selectedDate = $(this).data('date');
+        });
+
+        $('.heure').on('click', function() {
+        var selectedHeure = $(this).data('heure');
+        });
+    </script>
+
+{% endblock %}
