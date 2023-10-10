@@ -18,6 +18,7 @@ class RendezVousType extends AbstractType
             ->add('prenom', TextType::class, ['label' => 'Prénom'])
             ->add('email', TextType::class, ['label' => 'E-mail'])
             ->add('numero', IntegerType::class, ['label' => 'N° de téléphone'])
+            ->add('adresse', TextType::class, ['label' => 'Adresse'])
             ->add('valider', IntegerType::class, ['label' => 'Réserver'])
         ;
     }

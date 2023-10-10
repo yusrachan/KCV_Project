@@ -27,7 +27,13 @@ class Disponibilite
     private ?Kinesitherapeute $kineDispo = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $backgroundColor = null;
+    private ?string $background_color = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $text_color = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $border_color = null;
 
     public function __construct()
     {
@@ -92,12 +98,36 @@ class Disponibilite
 
     public function getBackgroundColor(): ?string
     {
-        return $this->backgroundColor;
+        return $this->background_color;
     }
 
-    public function setBackgroundColor(string $backgroundColor): static
+    public function setBackgroundColor(string $background_color): static
     {
-        $this->backgroundColor = $backgroundColor;
+        $this->background_color = $background_color;
+
+        return $this;
+    }
+
+    public function getTextColor(): ?string
+    {
+        return $this->text_color;
+    }
+
+    public function setTextColor(string $text_color): static
+    {
+        $this->text_color = $text_color;
+
+        return $this;
+    }
+
+    public function getBorderColor(): ?string
+    {
+        return $this->border_color;
+    }
+
+    public function setBorderColor(string $border_color): static
+    {
+        $this->border_color = $border_color;
 
         return $this;
     }

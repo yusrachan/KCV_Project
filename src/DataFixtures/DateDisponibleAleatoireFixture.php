@@ -31,6 +31,10 @@ class DateDisponibleAleatoireFixture extends Fixture implements DependentFixture
 
                 $disponibilite->setDateDisponible(new DateTime("2023-11-" . (($i + rand(1, 5)) % 28)));
 
+                $disponibilite->setTextColor('#FF0000');
+                $disponibilite->setBackgroundColor('#FFFFFF');
+                $disponibilite->setBorderColor('#FFFFFF');
+
                 $disponibilite->setKineDispo($kine);
 
                 $manager->persist($disponibilite);

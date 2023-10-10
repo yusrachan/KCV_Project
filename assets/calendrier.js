@@ -5,15 +5,15 @@ import interactionPlugin from "@fullcalendar/interaction";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
 document.addEventListener("DOMContentLoaded", function () {
-    let dispoJSONJS = document.getElementById('calendrier').dataset.calendrier;
-    let disposJSONJSArray = JSON.parse(disposJSONJS);
 
-    let calendarEl = document.getElementById("calendrier");
+    let div_calendrier = document.getElementById("div_calendrier");
+    let dispoJSONJS = div_calendrier.dataset.calendrier;
 
-    var calendar = new Calendar(calendarEl, {
-        dispo: disposJSONJSArray,
+    let disposArray = JSON.parse(dispoJSONJS);
 
-        displayDispoTime: true, // cacher l'heure
+    let calendar = new Calendar(div_calendrier, {
+        events: disposArray,
+
         initialView: "dayGridMonth",
         initialDate: new Date(), // aujourd'hui
         headerToolbar: {
@@ -22,8 +22,12 @@ document.addEventListener("DOMContentLoaded", function () {
             right: "dayGridMonth,timeGridWeek,timeGridDay",
         },
 
-        dateClick: function (dispo) {
+        dateClick: function (info) {
+            console.log(info.dateStr);
+            //implémenter la fonction afficherFormulaire pour gérer l'affichage du formulaire.
             afficherFormulaire(dispo)
         }
-    })
+    });
+    //appeler render() pour afficher le calendrier.
+    calendar.render();
 });

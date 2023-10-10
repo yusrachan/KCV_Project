@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Patient;
 use App\Entity\RendezVous;
-use App\Entity\Disponibilite;
 use App\Entity\Kinesitherapeute;
+use App\Entity\Patient;
+use App\Entity\TrancheHoraire;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,6 +56,15 @@ class CalendrierController extends AbstractController
         return $kines;
     }
 
+    /**
+     * Traiter la réservation d'un rendez-vous via un formulaire et enregistre le rendez-vous dans la bd si le formulaire est soumis et valide. 
+     * Rediriger ensuite l'utilisateur vers la page du calendrier.
+     *
+     * @param Request             $request        La requête HTTP.
+     * @param EntityManagerInterface $entityManager L'interface de gestionnaire d'entités Doctrine.
+     *
+     * @return Response La réponse HTTP à renvoyer.
+     */
     public function reservation(Request $request, EntityManagerInterface $entityManager): Response
     {
         $rendezVous = new RendezVous();
@@ -79,5 +88,38 @@ class CalendrierController extends AbstractController
         return $this->render('formulaire_reservation.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * Réserver une tranche horaire pour un patient en enregistrant un rendez-vous
+     * dans la bd et en supprimant la disponibilité associée à cette tranche horaire.
+     *
+     * @param Request      $request        La requête HTTP.
+     * @param TrancheHoraire $trancheHoraire La tranche horaire à réserver.
+     * @param Patient      $patient        Le patient pour lequel la tranche horaire est réservée.
+     */
+
+    public function reserverTrancheHoraire(Request $request, TrancheHoraire $trancheHoraire, Patient $patient)
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $rendezVous = new RendezVous();
+        // Associez la tranche horaire à l'objet RendezVous
+        $rendezVous->setHeureDebut($trancheHoraire);
+
+        // Associez le patient au rendez-vous
+        $rendezVous->setPatient($patient);
+
+        // Enregistrez le nouvel objet RendezVous dans la base de données
+        $entityManager->persist($rendezVous);
+
+
+        // Supprimez la disponibilité associée à cette tranche horaire
+        $disponibilite = $trancheHoraire->getDateDisponible();
+        $entityManager->remove($disponibilite);
+
+        // Enregistrez les modifications dans la base de données
+        $entityManager->flush();
     }
 }

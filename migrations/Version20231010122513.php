@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20231009124358 extends AbstractMigration
+final class Version20231010122513 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,7 +20,7 @@ final class Version20231009124358 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE disponibilite (id INT AUTO_INCREMENT NOT NULL, kine_dispo_id INT NOT NULL, date_disponible DATE NOT NULL, INDEX IDX_2CBACE2FF9C4AEB (kine_dispo_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE disponibilite (id INT AUTO_INCREMENT NOT NULL, kine_dispo_id INT NOT NULL, date_disponible DATE NOT NULL, background_color VARCHAR(255) NOT NULL, text_color VARCHAR(255) NOT NULL, border_color VARCHAR(255) NOT NULL, INDEX IDX_2CBACE2FF9C4AEB (kine_dispo_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE kinesitherapeute (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, prenom VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE patient (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, prenom VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, telephone INT NOT NULL, adresse VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE rendez_vous (id INT AUTO_INCREMENT NOT NULL, kinesitherapeute_id INT NOT NULL, patient_id INT NOT NULL, heure_debut_id INT NOT NULL, date_heure_debut DATETIME NOT NULL, INDEX IDX_65E8AA0A3B67E217 (kinesitherapeute_id), INDEX IDX_65E8AA0A6B899279 (patient_id), INDEX IDX_65E8AA0A791DFAD4 (heure_debut_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
