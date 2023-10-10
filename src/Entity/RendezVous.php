@@ -21,12 +21,13 @@ class RendezVous
     #[ORM\JoinColumn(nullable: false)]
     private ?Kinesitherapeute $kinesitherapeute = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
-
     #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Patient $patient = null;
+
+    #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?TrancheHoraire $heureDebut = null;
 
     public function getId(): ?int
     {
@@ -57,17 +58,6 @@ class RendezVous
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
-
-        return $this;
-    }
 
     public function getPatient(): ?Patient
     {
@@ -77,6 +67,18 @@ class RendezVous
     public function setPatient(?Patient $patient): static
     {
         $this->patient = $patient;
+
+        return $this;
+    }
+
+    public function getHeureDebut(): ?TrancheHoraire
+    {
+        return $this->heureDebut;
+    }
+
+    public function setHeureDebut(?TrancheHoraire $heureDebut): static
+    {
+        $this->heureDebut = $heureDebut;
 
         return $this;
     }

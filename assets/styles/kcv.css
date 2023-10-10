@@ -1,0 +1,79 @@
+
+body{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    font-family: Arial;
+}
+
+nav a{
+    text-decoration: none;
+    display: block;
+    color: white;
+}
+
+.menu li{
+    list-style-type: none;
+    float: left;
+    text-align: center;
+    width: 20%;
+}
+
+nav{
+    width: 100%;
+    margin: 0 auto;
+    background-color: #0565cb;
+}
+
+nav ul li{
+    margin-right: 20px;
+}
+
+nav ul{
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+header{
+    background-color: #0565cb;;
+    height: 200px;
+    display: flex; /* Utiliser un modèle de boîte flexible pour le contenu */
+    justify-content: space-between; /* Aligner les éléments à l'extrémité gauche et droite du header */
+    align-items: center;
+}
+
+.container {
+    margin: 0 auto; /* Centrer le contenu horizontalement dans le header */
+    display: flex; /* Utiliser un modèle de boîte flexible pour le contenu */
+    justify-content: space-between; /* Aligner les éléments à l'extrémité gauche et droite du container */
+    align-items: center; /* Centrer verticalement les éléments dans le container */
+}
+
+.logo img {
+    max-height: 300px; /* Hauteur maximale du logo */
+    margin-right: 300px;
+}
+
+main{
+    padding: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    width: 50%;
+    overflow: auto;
+    align-items: center;
+    box-shadow: 0px 16px 32px rgba(46, 34, 3,0.25);
+}
+
+aside{
+    float: left;
+    margin: 1.5%;
+    width: 60%;
+}
+
+.problema{
+    float: right;
+    width: 40%;
+}

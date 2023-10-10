@@ -9,7 +9,7 @@
 import './styles/app.css';
 
 //rajouter le .css bootstrap
-import '~bootstrap/dist/css/bootstrap.css';
+// import '~bootstrap/dist/css/bootstrap.css';
 
 // jquery
 const $ = require ('jquery');
