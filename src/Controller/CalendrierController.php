@@ -58,38 +58,26 @@ class CalendrierController extends AbstractController
 
     public function reservation(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $patient = new Patient();
-        $dispo = new Disponibilite();
-        
         $rendezVous = new RendezVous();
-        $rendezVous->setPatient($patient);
-        $rendezVous->setDateDisponible($dispo);
-
         $form = $this->createForm(RendezVousType::class, $rendezVous);
 
         // Traiter le formulaire lorsqu'il est soumis
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Obtenir l'objet Patient à partir de la base de données en utilisant $patientId
-            $entityManager = $this->getDoctrine()->getManager();
-            $patient = $entityManager->getRepository(Patient::class)->find($patientId);
+            // Récupérer les données du formulaire
+            $rendezVous = $form->getData();
 
-            // Création objet RendezVous et remplis avec les données du formulaire
-            $rendezVous = new RendezVous();
-            $rendezVous->setHeureDebut($form->get('heure')->getData());
-            $rendezVous->setDateHeureDebut($form->get('date')->getData());
-
-            // Persister l'objet RendezVous dans la bd
-            $entityManager = $this->getDoctrine()->getManager();
+            // enregistrer le RendezVous dans la bd
             $entityManager->persist($rendezVous);
             $entityManager->flush();
 
-            return $this->redirectToRoute('calendrier'); // Rediriger l'utilisateur vers la page du calendrier
-
-            return $this->render('reservation/formulaire_reservation.html.twig', [
-                'form' => $form->createView(),
-            ]);
+            // Rediriger l'utilisateur vers la page du calendrier
+            return $this->redirectToRoute('calendrier');
         }
+        // Si le formulaire n'est pas encore soumis ou n'est pas valide ou si le traitement du formulaire a échoué, afficher le formulaire
+        return $this->render('formulaire_reservation.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }
