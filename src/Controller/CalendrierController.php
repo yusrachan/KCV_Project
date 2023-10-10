@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Patient;
 use App\Entity\RendezVous;
+use App\Entity\Disponibilite;
 use App\Entity\Kinesitherapeute;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,10 +56,14 @@ class CalendrierController extends AbstractController
         return $kines;
     }
 
-    public function reservation(Request $request, Kinesitherapeute $kine, $patientId): Response
+    public function reservation(Request $request, EntityManagerInterface $entityManager): Response
     {
-        // Créer une instance de la classe RendezVous
+        $patient = new Patient();
+        $dispo = new Disponibilite();
+        
         $rendezVous = new RendezVous();
+        $rendezVous->setPatient($patient);
+        $rendezVous->setDateDisponible($dispo);
 
         $form = $this->createForm(RendezVousType::class, $rendezVous);
 
@@ -64,14 +71,12 @@ class CalendrierController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Obtenez l'objet Patient à partir de la base de données en utilisant $patientId
+            // Obtenir l'objet Patient à partir de la base de données en utilisant $patientId
             $entityManager = $this->getDoctrine()->getManager();
             $patient = $entityManager->getRepository(Patient::class)->find($patientId);
 
             // Création objet RendezVous et remplis avec les données du formulaire
             $rendezVous = new RendezVous();
-            $rendezVous->setKinesitherapeute($kine);
-            $rendezVous->setPatient($patient);
             $rendezVous->setHeureDebut($form->get('heure')->getData());
             $rendezVous->setDateHeureDebut($form->get('date')->getData());
 

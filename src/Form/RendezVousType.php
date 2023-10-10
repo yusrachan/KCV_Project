@@ -3,19 +3,22 @@
 namespace App\Form;
 
 use App\Entity\RendezVous;
+use Doctrine\DBAL\Types\IntegerType;
+use Doctrine\DBAL\Types\TextType;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RendezVousType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(FormBuilderInterface $builder, array $options){
         $builder
-            ->add('dateHeureDebut')
-            ->add('email')
-            ->add('kinesitherapeute')
-            ->add('patient')
+            ->add('nom', TextType::class, ['label' => 'Nom'])
+            ->add('prenom', TextType::class, ['label' => 'Prénom'])
+            ->add('email', TextType::class, ['label' => 'E-mail'])
+            ->add('numero', IntegerType::class, ['label' => 'N° de téléphone'])
+            ->add('valider', IntegerType::class, ['label' => 'Réserver'])
         ;
     }
 

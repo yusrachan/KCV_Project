@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
             right: "dayGridMonth,timeGridWeek,timeGridDay",
         },
 
-        dateClick: function (info) {
-
+        dateClick: function (dispo) {
+            afficherFormulaire(dispo)
         }
     })
 });
