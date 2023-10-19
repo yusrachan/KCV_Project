@@ -6,42 +6,111 @@
 			{% block title %}KINÉCHEZVOUS
 			{% endblock %}
 		</title>
-		<link rel="icon" href="./assets/styles/images/logo_head_ico.ico">
+		<link
+		rel="icon" href="./assets/styles/images/logo_head_ico.ico">
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-		<link rel="stylesheet" href="{{ ('./assets/styles/kcv.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/styles/kcv.css') }}">
 		{% block stylesheets %}
-			{# {{ encore_entry_link_tags('app') }} #}
+			{# {{ encore_entry_link_tags('calendrier') }} #}
 		{% endblock %}
 
 		{% block javascripts %}
-			{# {{ encore_entry_script_tags('app') }} #}
+			{# {{ encore_entry_script_tags('calendrier') }} #}
 		{% endblock %}
 	</head>
 	<body>
 		<nav>
 			<ul>
-				<li>
-					<a href="#">Section 1</a>
-				</li>
-				<li>
-					<a href="#">Section 2</a>
-				</li>
-				<li>
-					<a href="{{ path ('afficher_calendrier') }}">Calendrier</a>
-				</li>
-
-				{% if app.user %}
-					<li>
-						<p>{{ app.user.nom ~ "," ~ app.user.prenom }}</p>
-					</li>
-				{% endif %}
-
-				<li>
-					<a href="{{ path('app_logout') }}">Logout</a>
-				</li>
-
+				<li><a href="#prob">À propos</a></li>
+				<li><a href="#qui">Qui sommes-nous ?</a></li>
+				<li><a href="#soins">Les types de soins</a></li>
+				<li><a href="#ou">Où exerçons-nous ?</a></li>
+				<li><a href="#contact">Contact</a></li>
+				<li><a href="#calend">Calendrier</a></li>
 			</ul>
 		</nav>
+
+		<aside>
+			<img src="images/kine.jpeg">
+		</aside>
+		<section id="problema">
+
+			<h1 id="prob">À quelle problématique répondons-nous ?</h1>
+			<br>
+			<p>Les soins à domicile font partie intégrante de la prise en charge en kinésithérapie. Que ce soit pour des soins postopératoires, respiratoires, pédiatriques, neurologiques ou autre, les patients ont le droit de bénéficier de ces soins.</p>
+			<br>
+			<p>Aujourd’hui, certaines difficultés de terrain surgissent pour s’assurer les services d’un kinésithérapeute à domicile. KINÉCHEZVOUS donne une solution à ce type de problème et offre ses services aux personnes qui en ont besoin. Les médecins qui souhaiteraient que leurs patients puissent en bénéficier, trouvent en notre équipe une opportunité qui faciliterait la prise en charge de patients à domicile et une communication interdisciplinaire optimisée.</p>
+			<br>
+			<p>Avec la situation actuelle liée à la pandémie du COVID-19, force est de constater que beaucoup soins de kinésithérapie ont dû être suspendus, des personnes âgées se sont vues isolées et la majeure partie de la population s’est sédentarisée.</p>
+			<br>
+			<p>Sur base de telles observations de terrain, KINÉCHEZVOUS se constitue aujourd’hui en vue d’agir sur des dimensions essentielles de la prise en charge des patients.</p>
+		</section>
+
+		<section>
+			<h1 id="qui">Qui sommes-nous ?</h1>
+			<p>
+				<b>KINÉCHEZVOUS</b>
+				est une jeune entreprise débutante qui se veut prodiguer des soins exclusivement à domicile. Notre équipe se constitue de plusieurs kinésithérapeutes dynamiques, motivés, professionnels et engagés qui ont décidé de se rendre disponibles et réactifs face à la demande croissante de soins à domicile.</p>
+
+			<h1 id="soins">Les types de soins que nous fournissons</h1>
+			<p>
+				<b>KINÉCHEZVOUS</b>
+				prend en charge tous types de pathologies prescrites aussi bien par les médecins généralistes que les médecins spécialistes pour des soins de kinésithérapie, essentiellement:
+				<br>
+				<ul>
+					<li>Kinésithérapie générale</li>
+					<li>Kinésithérapie en gériatrie</li>
+					<li>Kinésithérapie en pédiatrie</li>
+					<li>Kinésithérapie respiratoire</li>
+					<li>Kinésithérapie en neurologie</li>
+					<li>Kinésithérapie sportive</li>
+					<li>Thérapie manuelle</li>
+					<li>Rééducation post-opératoire Ortho-Traumato-Rhumato</li>
+					<li>Revalidation post-AVC</li>
+					<li>Revalidation cardio-pulmonaire</li>
+					<li>Rééducation à la marche</li>
+					<li>Drainage lymphatique manuel</li>
+					<li>Rééducation pelvi-périnéale</li>
+					<li>Dysfonctions temporo-mandibulaire</li>
+				</ul>
+			</p>
+
+		</section>
+
+
+		<section>
+			<h1 id="ou">Où exerçons-nous ?</h1>
+		</section>
+
+        <h1 id="contact">Contactez-nous</h1>
+        <form action="" method="post">
+            <div>
+                <label for="name">Nom :</label><br>
+                <input type="text" id="name">
+            </div>
+            <div>
+                <label for="surname">Prénom :</label><br>
+                <input type="text" id="surname">
+            </div>
+            <div>
+                <label for="email">E-mail :</label><br>
+                <input type="email" id="email">
+            </div>
+            <div>
+                <label for="message">Message :</label><br>
+                <textarea id="message"></textarea>
+            </div>
+            <div class="button">
+                <button type="submit">Envoyer</button>
+            </div>
+
+		<section>
+			<h1 id="calend">Calendrier</h1>
+			<p>
+				Vous voulez déjà prendre rendez-vous avec nous ? Cliquez <a href="{{path('index.html.twig')}}">ici</a> pour accéder à notre calendrier avec toutes les disponibilités des kinésithérapeutes.
+			</p>			
+		</section>
+
 		{% block body %}{% endblock %}
 	</body>
 </html>
