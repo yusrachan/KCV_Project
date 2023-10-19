@@ -17,13 +17,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class CalendrierController extends AbstractController
 {
-    #[Route('/calendrier')]
+    #[Route('/calendrier', name:'afficher_calendrier')]
     public function index(): Response
     {
         $kines = $this->getKinesFromDatabase(); // données kinés
         $dates = $this->getDatesFromDatabase();
         $heures = $this->getDatesFromDatabase();
 
+        dd("avant charger la vue");
         return $this->render('calendrier/index.html.twig', [
             'kines' => $kines,
             'dates' => $dates,
