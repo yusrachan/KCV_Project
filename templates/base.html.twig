@@ -9,6 +9,8 @@
 		<link rel="icon" href="{{ asset('assets/images/logo_head_ico.ico') }}">
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 		<link rel="stylesheet" href="{{ asset('assets/styles/kcv.css') }}">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+		<script src="{{ asset('build/calendrier.bundle.js') }}"></script>
 		{# {% block stylesheets %}
 			{# {{ encore_entry_link_tags('calendrier') }} #}
 		{# {% endblock %}
@@ -18,17 +20,22 @@
 		{# {% endblock %} #}
 	</head>
 	<body>
-		<nav>
-			<ul>
-				<li><a href="#prob">À propos</a></li>
-				<li><a href="#qui">Qui sommes-nous ?</a></li>
-				<li><a href="#soins">Les types de soins</a></li>
-				<li><a href="#ou">Où exerçons-nous ?</a></li>
-				<li><a href="#contact">Contact</a></li>
-				<li><a href="#calend">Calendrier</a></li>
-			</ul>
-		</nav>
-
+		<header>
+			<div class="container">
+				<div class="logo">
+					<img src="{{ asset('assets/images/1.png') }}">
+			</div>
+			<nav>
+				<ul>
+					<li><a href="#prob">À propos</a></li>
+					<li><a href="#qui">Qui sommes-nous ?</a></li>
+					<li><a href="#soins">Les types de soins</a></li>
+					<li><a href="#ou">Où exerçons-nous ?</a></li>
+					<li><a href="#contact">Contact</a></li>
+					<li><a href="#calend">Calendrier</a></li>
+				</ul>
+			</nav>
+		</header>
 		{% block body %}{% endblock %}
 	</body>
 </html>

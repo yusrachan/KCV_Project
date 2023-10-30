@@ -2,35 +2,75 @@
 
 namespace App\Controller;
 
-use App\Entity\RendezVous;
-use App\Entity\Kinesitherapeute;
 use App\Entity\Patient;
+use App\Entity\RendezVous;
+use App\Entity\Disponibilite;
 use App\Entity\TrancheHoraire;
+use App\Entity\Kinesitherapeute;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * Je modifie pour inclure la logique de la vue de calendrier et de la liste déroulante des kinés
  */
 class CalendrierController extends AbstractController
 {
-    #[Route('/calendrier', name:'afficher_calendrier')]
-    public function index(): Response
+    #[Route('/calendrier', name: 'afficher_calendrier')]
+    public function index(EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
     {
-        $kines = $this->getKinesFromDatabase(); // données kinés
-        $dates = $this->getDatesFromDatabase();
-        $heures = $this->getDatesFromDatabase();
+        // $kines = $this->getKinesFromDatabase(); // données kinés
+        // $dates = $this->getDatesFromDatabase();
+        // $heures = $this->getDatesFromDatabase();
 
-        dd("avant charger la vue");
-        return $this->render('calendrier/index.html.twig', [
-            'kines' => $kines,
-            'dates' => $dates,
-            'heures' => $heures,
+        // dd("avant charger la vue");
+        // return $this->render('calendrier/afficher_calendrier.html.twig', [
+        //     'kines' => $kines,
+        //     'dates' => $dates,
+        //     'heures' => $heures,
+        // ]);
+
+        //utilisation de la méthode afficherCalendrier pour obtenir les données des événements, les transformer au bon format et les sérialiser en JSON avant de les rendre dans le template Twig
+        $evenementsJSON = $this->afficherCalendrier($entityManager, $serializer);
+
+        return $this->render('calendrier/afficher_calendrier.html.twig', ['evenementsJSON' => $evenementsJSON,
         ]);
     }
+
+    /**
+     * Extrait les disponibilités depuis la base de données, les transforme en un tableau d'événements au format souhaité (avec des propriétés telles que id, title, start, etc.), puis sérialise ce tableau en une représentation JSON à l'aide du service de sérialisation.
+     */
+    #[Route('/obtenir/calendrier', name: 'obtenir_calendrier')]
+    public function afficherCalendrier(EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
+    {
+        $disponibilites = $entityManager->getRepository(Disponibilite::class)->findAll();
+
+        $evenements = [];
+
+        foreach ($disponibilites as $disponibilite) {
+            $evenements[] = [
+                'id' => $disponibilite->getId(),
+                'title' => $disponibilite->getKineDispo(),
+                'start' => $disponibilite->getDateDisponible()->format('Y-m-d'),
+                'backgroundColor' => $disponibilite->getBackgroundColor(),
+                'textColor' => $disponibilite->getTextColor(),
+                'borderColor' => $disponibilite->getBorderColor(),
+            ];
+        }
+
+        // convertit le tableau d'événements en une représentation JSON: prend les objets dans le tableau $evenements, les transforme en chaînes JSON, et stocke le résultat dans la variable $evenementsJSON
+        // $evenementsJSON = $serializer->serialize($evenements, 'json');
+
+
+        return new JsonResponse($evenements);
+    }
+
 
     private function getDatesFromDatabase()
     {

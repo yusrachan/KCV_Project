@@ -14,7 +14,6 @@
 
 {% block body %}
     <main>
-
 			<aside class="img_gauche">
 				<img src="{{ asset('assets/images/kine.jpeg') }}">
 			</aside>
@@ -95,7 +94,7 @@
 			<section>
 				<h1 id="calend">Calendrier</h1>
 				<p>
-					Vous voulez déjà prendre rendez-vous avec nous ? Cliquez <a href="{{path('afficher_calendrier')}}">ici</a> pour accéder à notre calendrier avec toutes les disponibilités des kinésithérapeutes.
+					Vous voulez déjà prendre rendez-vous avec nous ? Cliquez <a href="{{ path('afficher_calendrier') }}">ici</a> pour accéder à notre calendrier avec toutes les disponibilités des kinésithérapeutes.
 				</p>			
 			</section>
 		</main>

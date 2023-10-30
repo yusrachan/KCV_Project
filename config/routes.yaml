@@ -1,3 +1,11 @@
 app_base:
     path: /
     controller: App\Controller\BaseController::index
+
+afficher_calendrier:
+    path: /calendrier
+    controller: App\Controller\CalendrierController::index
+
+obtenir_calendrier:
+    path: /obtenir/calendrier
+    controller: App\Controller\CalendrierController::afficherCalendrier

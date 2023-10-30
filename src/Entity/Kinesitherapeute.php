@@ -102,4 +102,9 @@ class Kinesitherapeute
 
         return $this;
     }
+
+    public function getNomComplet()
+    {
+        return $this->getNom() . ' ' . $this->getPrenom();
+    }
 }

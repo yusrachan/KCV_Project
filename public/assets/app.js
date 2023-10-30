@@ -6,7 +6,7 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
+import '/public/assets/styles/app.css';
 
 //rajouter le .css bootstrap
 // import '~bootstrap/dist/css/bootstrap.css';
