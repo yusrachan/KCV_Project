@@ -2,36 +2,33 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-	{{ parent() }}
-	{{ encore_entry_link_tags('calendrier') }}
+    {{ parent() }}
+    {{ encore_entry_link_tags('calendrier') }}
+    {# Incluez ici d'autres liens vers des fichiers CSS si nécessaire #}
+    <link rel="stylesheet" href="{{ asset('build/calendrier.bcaddb75.css') }}">
 {% endblock %}
 
 {% block javascripts %}
-	{{ parent() }}
-	{{ encore_entry_script_tags('calendrier') }}
-	<script>
-		// Incluez vos scripts JavaScript pour afficher le calendrier ici
-        var evenementsJSON = {{ evenementsJSON | raw }}; // Récupérez les données JSON du contrôleur
+    {{ parent() }}
+    {{ encore_entry_script_tags('calendrier') }}
+    {# Incluez ici d'autres scripts JavaScript si nécessaire #}
 
-        document.addEventListener("DOMContentLoaded", function () { // Obtenir le conteneur du calendrier
-        var calendarEl = document.getElementById("calendrier");
-
-        // Initialiser le calendrier avec les événements JSON
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: "dayGridMonth",
-        initialDate: new Date(),
-        events: evenementsJSON,
-        // Autres options du calendrier...
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var calendarEl = document.getElementById("calendrier"); // Sélectionnez le conteneur du calendrier
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: "dayGridMonth",
+                initialDate: new Date(),
+                // Autres options du calendrier...
+            });
+            calendar.render(); // Afficher le calendrier
         });
+    </script>
 
-        // Afficher le calendrier
-        calendar.render();
-        });
-	</script>
 {% endblock %}
 
 {% block body %}
-
-	<div id="calendrier" data-calendrier="{{ evenementsJSON }}" class="calendrier"></div>
-
+    <div id="calendrier" class="calendar">
+        <!-- Le calendrier s'affichera ici -->
+    </div>
 {% endblock %}

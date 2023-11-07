@@ -3,7 +3,7 @@ app_base:
     controller: App\Controller\BaseController::index
 
 afficher_calendrier:
-    path: /calendrier
+    path: /afficher/calendrier
     controller: App\Controller\CalendrierController::index
 
 obtenir_calendrier:

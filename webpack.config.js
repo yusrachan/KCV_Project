@@ -21,7 +21,8 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './public/assets/app.js')
-    // .addEntry('calendrier', './assets/calendrier.js')
+    .addEntry('calendrier', './public/assets/calendrier.js')
+    // .addEntry('calendrier', './public/assets/calendar.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -71,15 +72,15 @@ Encore
     //.autoProvidejQuery()
     ;
 
-const path = require('path');
+// const path = require('path');
 
-module.exports = {
-    entry: './assets/js/calendrier.js',
-    output: {
-        filename: 'calendrier.bundle.js',
-        path: path.resolve(__dirname, 'public/build'),
-    },
-    mode: 'production', // Ou 'development' en fonction de l'environnement
-};
+// module.exports = {
+//     entry: './assets/calendrier.js',
+//     output: {
+//         filename: 'calendrier.bundle.js',
+//         path: path.resolve(__dirname, 'public/build'),
+//     },
+//     mode: 'production', // Ou 'development' en fonction de l'environnement
+// };
 
 module.exports = Encore.getWebpackConfig();
