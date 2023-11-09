@@ -10,8 +10,10 @@ import '/public/assets/styles/app.css';
 
 //rajouter le .css bootstrap
 // import '~bootstrap/dist/css/bootstrap.css';
-import './public/assets/styles/app.css';
-import './public/assets/styles/kcv.css';
+import './styles/app.css';
+// import './public/assets/styles/app.css';
+import './styles/kcv.css';
+// import './public/assets/styles/kcv.css';
 
 // jquery
 const $ = require ('jquery');
