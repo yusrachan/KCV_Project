@@ -74,16 +74,3 @@ main{
     float: right;
     width: 40%;
 }
-
-#calendar {
-    width: 50%;
-    height: 50%;
-}
-
-.calendar {
-    /* Vos styles personnalisés ici */
-    background-color: #0a0909;
-    border: 1px solid #ccc;
-    padding: 10px;
-    /* Ajoutez d'autres styles selon vos besoins */
-}
