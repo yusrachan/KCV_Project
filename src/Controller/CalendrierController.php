@@ -25,17 +25,6 @@ class CalendrierController extends AbstractController
     #[Route('/afficher/calendrier', name: 'afficher_calendrier')]
     public function index(EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
     {
-        // $kines = $this->getKinesFromDatabase(); // données kinés
-        // $dates = $this->getDatesFromDatabase();
-        // $heures = $this->getDatesFromDatabase();
-
-        // dd("avant charger la vue");
-        // return $this->render('calendrier/afficher_calendrier.html.twig', [
-        //     'kines' => $kines,
-        //     'dates' => $dates,
-        //     'heures' => $heures,
-        // ]);
-
         //utilisation de la méthode afficherCalendrier pour obtenir les données des événements, les transformer au bon format et les sérialiser en JSON avant de les rendre dans le template Twig
         $evenementsJSON = $this->afficherCalendrier($entityManager, $serializer);
 
@@ -59,6 +48,7 @@ class CalendrierController extends AbstractController
                 'id' => $disponibilite->getId(),
                 'title' => $disponibilite->getKineDispo()->getNomComplet(),
                 'start' => $disponibilite->getDateDisponible()->format('Y-m-d'),
+                'end' => $disponibilite->getDateDisponible()->format('Y-m-d'),
                 'backgroundColor' => $disponibilite->getBackgroundColor(),
                 'textColor' => $disponibilite->getTextColor(),
                 'borderColor' => $disponibilite->getBorderColor(),
