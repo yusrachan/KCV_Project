@@ -36,6 +36,10 @@ class Disponibilite
 
     #[ORM\Column(length: 255)]
     private ?string $border_color = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?TrancheHoraire $trancheHoraire = null;
     
 
     public function __construct()
@@ -131,6 +135,18 @@ class Disponibilite
     public function setBorderColor(string $border_color): static
     {
         $this->border_color = $border_color;
+
+        return $this;
+    }
+
+    public function getTrancheHoraire(): ?TrancheHoraire
+    {
+        return $this->trancheHoraire;
+    }
+
+    public function setTrancheHoraire(?TrancheHoraire $trancheHoraire): self
+    {
+        $this->trancheHoraire = $trancheHoraire;
 
         return $this;
     }

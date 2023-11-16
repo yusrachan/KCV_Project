@@ -6,6 +6,12 @@ afficher_calendrier:
     path: /afficher/calendrier
     controller: App\Controller\CalendrierController::index
 
-obtenir_calendrier:
-    path: /obtenir/calendrier
-    controller: App\Controller\CalendrierController::afficherCalendrier
+ajouter_patient:
+    path: /ajouter/patient
+    controller: App\Controller\CalendrierController::ajouterPatient
+    methods: [POST]
+
+ajouter_rendezvous:
+    path: /ajouter/rendezvous
+    controller: App\Controller\CalendrierController::ajouterRendezVous
+    methods: [POST]
