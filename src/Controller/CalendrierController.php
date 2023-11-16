@@ -7,6 +7,7 @@ use App\Entity\RendezVous;
 use App\Entity\Disponibilite;
 use App\Entity\TrancheHoraire;
 use App\Entity\Kinesitherapeute;
+use App\Entity\TestEvenement;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,10 +24,23 @@ use Symfony\Component\Serializer\Annotation\Ignore;
 class CalendrierController extends AbstractController
 {
     #[Route('/afficher/calendrier', name: 'afficher_calendrier')]
-    public function index(EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
+    public function index(SerializerInterface $serializer): Response
     {
         //utilisation de la méthode afficherCalendrier pour obtenir les données des événements, les transformer au bon format et les sérialiser en JSON avant de les rendre dans le template Twig
-        $evenementsJSON = $this->afficherCalendrier($entityManager, $serializer);
+        $evenements = $this->getDoctrine()->getRepository(TestEvenement::class)->findAll();
+
+        $evenementsArray = [];
+
+        foreach ($evenements as $evenement) {
+            $evenementsArray[] = [
+                'id' => $evenement->getId(),
+                'title' => $evenement->getTitre(),
+                'start' => $evenement->getDateDebut()->format('Y-m-d H:i:s'),
+                'end' => $evenement->getDateFin()->format('Y-m-d H:i:s'),
+            ];
+        }
+
+        $evenementsJSON = $serializer->serialize($evenementsArray, 'json');
 
         return $this->render('calendrier/afficher_calendrier.html.twig', [
             'evenementsJSON' => $evenementsJSON,
@@ -36,30 +50,30 @@ class CalendrierController extends AbstractController
     /**
      * Extrait les disponibilités depuis la base de données, les transforme en un tableau d'événements au format souhaité (avec des propriétés telles que id, title, start, etc.), puis sérialise ce tableau en une représentation JSON à l'aide du service de sérialisation.
      */
-    public function afficherCalendrier(EntityManagerInterface $entityManager, SerializerInterface $serializer)
-    {
-        $disponibilites = $entityManager->getRepository(Disponibilite::class)->findAll();
+    // public function afficherCalendrier(EntityManagerInterface $entityManager, SerializerInterface $serializer)
+    // {
+    //     $disponibilites = $entityManager->getRepository(Disponibilite::class)->findAll();
 
-        $evenements = [];
+    //     $evenements = [];
 
-        foreach ($disponibilites as $disponibilite) {
+    //     foreach ($disponibilites as $disponibilite) {
 
-            $evenements[] = [
-                'id' => $disponibilite->getId(),
-                'title' => $disponibilite->getKineDispo()->getNomComplet(),
-                'start' => $disponibilite->getDateDisponible()->format('Y-m-d'),
-                'end' => $disponibilite->getDateDisponible()->format('Y-m-d'),
-                'backgroundColor' => $disponibilite->getBackgroundColor(),
-                'textColor' => $disponibilite->getTextColor(),
-                'borderColor' => $disponibilite->getBorderColor(),
-            ];
-        }
+    //         $evenements[] = [
+    //             'id' => $disponibilite->getId(),
+    //             'title' => $disponibilite->getKineDispo()->getNomComplet(),
+    //             'start' => $disponibilite->getDateDisponible()->format('Y-m-d'),
+    //             'end' => $disponibilite->getDateDisponible()->format('Y-m-d'),
+    //             'backgroundColor' => $disponibilite->getBackgroundColor(),
+    //             'textColor' => $disponibilite->getTextColor(),
+    //             'borderColor' => $disponibilite->getBorderColor(),
+    //         ];
+    //     }
 
-        // convertit le tableau d'événements en une représentation JSON: prend les objets dans le tableau $evenements, les transforme en chaînes JSON, et stocke le résultat dans la variable $evenementsJSON
-        $evenementsJSON = $serializer->serialize($evenements, 'json');
+    //     // convertit le tableau d'événements en une représentation JSON: prend les objets dans le tableau $evenements, les transforme en chaînes JSON, et stocke le résultat dans la variable $evenementsJSON
+    //     $evenementsJSON = $serializer->serialize($evenements, 'json');
 
-        return $evenementsJSON;
-    }
+    //     return $evenementsJSON;
+    // }
 
 
     private function getDatesFromDatabase()

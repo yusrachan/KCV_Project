@@ -21,7 +21,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './public/assets/app.js')
-    .addEntry('calendrier', './public/assets/calendrier.js')
+    .addEntry('calendrier', './assets/calendrier.js')
     // .addEntry('calendrier', './public/assets/calendar.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20231010122513 extends AbstractMigration
+final class Version20231116082427 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -24,6 +24,7 @@ final class Version20231010122513 extends AbstractMigration
         $this->addSql('CREATE TABLE kinesitherapeute (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, prenom VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE patient (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, prenom VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, telephone INT NOT NULL, adresse VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE rendez_vous (id INT AUTO_INCREMENT NOT NULL, kinesitherapeute_id INT NOT NULL, patient_id INT NOT NULL, heure_debut_id INT NOT NULL, date_heure_debut DATETIME NOT NULL, INDEX IDX_65E8AA0A3B67E217 (kinesitherapeute_id), INDEX IDX_65E8AA0A6B899279 (patient_id), INDEX IDX_65E8AA0A791DFAD4 (heure_debut_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE test_evenement (id INT AUTO_INCREMENT NOT NULL, titre VARCHAR(255) NOT NULL, date_debut DATETIME NOT NULL, date_fin DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tranche_horaire (id INT AUTO_INCREMENT NOT NULL, heure_debut TIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE tranche_horaire_disponibilite (tranche_horaire_id INT NOT NULL, disponibilite_id INT NOT NULL, INDEX IDX_77D033969832F6F (tranche_horaire_id), INDEX IDX_77D03392B9D6493 (disponibilite_id), PRIMARY KEY(tranche_horaire_id, disponibilite_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE `user` (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', password VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -49,6 +50,7 @@ final class Version20231010122513 extends AbstractMigration
         $this->addSql('DROP TABLE kinesitherapeute');
         $this->addSql('DROP TABLE patient');
         $this->addSql('DROP TABLE rendez_vous');
+        $this->addSql('DROP TABLE test_evenement');
         $this->addSql('DROP TABLE tranche_horaire');
         $this->addSql('DROP TABLE tranche_horaire_disponibilite');
         $this->addSql('DROP TABLE `user`');
