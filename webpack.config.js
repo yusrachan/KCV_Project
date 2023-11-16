@@ -10,7 +10,8 @@ Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
     // public path used by the web server to access the output path
-    .setPublicPath('/project1/public/build')
+    // seulement en local
+    .setPublicPath('/build')
     // only needed for CDN's or subdirectory deploy
     //.setManifestKeyPrefix('build/')
 
@@ -21,7 +22,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './public/assets/app.js')
-    .addEntry('calendrier', './assets/calendrier.js')
+    .addEntry('calendrier', './public/assets/calendrier.js')
     // .addEntry('calendrier', './public/assets/calendar.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
